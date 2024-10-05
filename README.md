@@ -35,11 +35,10 @@ A API desenvolvida oferece uma funcionalidade principal:
 
 1. **Banco de Dados**:
    - Abra o **SQL Server Management Studio (SSMS)**.
-   - Carregue o script `cria-db.sql` disponível na pasta `Material-Aluno` e execute para criar o banco de dados e os usuários.
+   - Carregue o script `cria-db.sql` e execute para criar o banco de dados e os usuários.
    
 2. **Configurando o Projeto**:
-   - Abra o terminal dentro da pasta do projeto (`Exo.WebApi`).
-   - Verifique se o .NET está instalado e na versão correta:
+   - Abra o terminal e verifique se o .NET está instalado e na versão correta:
      ```bash
      dotnet --version
      ```
