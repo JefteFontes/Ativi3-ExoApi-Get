@@ -26,7 +26,7 @@ GO
 
 -- UPDATE Projetos SET NomeDoProjeto = 'NomeDoProjeto A1' Where Id = 1;
 
- -- DELETE FROM Projetos WHERE Id = 1;
+-- DELETE FROM Projetos WHERE Id = 1;
 
 SELECT Id, NomeDoProjeto, Area, Status FROM Projetos
 GO
