@@ -3,6 +3,11 @@ using Exo.WebApi.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using System;
+using System.Security.Claims;
+using Microsoft.IdentityModel.JsonWebTokens;
+using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
+
 
 namespace Exo.WebApi.Controllers
 {
@@ -24,13 +29,43 @@ namespace Exo.WebApi.Controllers
             return Ok(_usuarioRepository.Listar());
         }
 
-        [HttpPost]
-        public IActionResult Cadastrar(Usuario usuario)
+        // [HttpPost]
+        // public IActionResult Cadastrar(Usuario usuario)
+        // {
+        //     _usuarioRepository.Cadastrar(usuario);
+        //     return StatusCode(201);
+        // }
+
+        // Novo Post
+        public IActionResult Post(Usuario usuario)
         {
-            _usuarioRepository.Cadastrar(usuario);
-            return StatusCode(201);
+            Usuario usuarioBuscado = _usuarioRepository.Login
+            (
+                usuario.Email,
+                usuario.Senha
+            );
+            if(usuarioBuscado == null)
+            {
+                return NotFound("E-mail ou senha inválidos!");
+            }
+            var claims = new[]
+            {
+                new Claim(System.IdentityModel.Tokens.Jwt.JwtRegisteredClaimNames.Email, usuarioBuscado.Email),
+                new Claim(System.IdentityModel.Tokens.Jwt.JwtRegisteredClaimNames.Jti, usuarioBuscado.Id.ToString()),
+            };
+            var key = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes("exoapi-chave-autenticacao"));
+            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+            var token = new JwtSecurityToken(
+                issuer: "exoapi.webapi",
+                audience: "exoapi.webapi",
+                claims: claims,
+                expires: DateTime.Now.AddMinutes(30),
+                signingCredentials: creds
+            );
+            return Ok(
+                new{ token = new JwtSecurityTokenHandler().WriteToken(token)}
+            );
         }
-        
         [HttpGet("{id}")]
         public IActionResult BuscarPorId(int id)
         {
@@ -42,7 +77,7 @@ namespace Exo.WebApi.Controllers
 
             return Ok(usuario);
         }
-
+        [Authorize]
         [HttpPut("{id}")]
         public IActionResult Atualizar(int id, Usuario usuario)
         {
@@ -50,6 +85,7 @@ namespace Exo.WebApi.Controllers
             return StatusCode(204);
         }
 
+        [Authorize]
         [HttpDelete("{id}")]
         public IActionResult Deletar(int id)
         {

@@ -8563,11 +8563,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\jefte\\Desktop\\Exo.WebApi\\Exo.WebApi.csproj",
+      "projectUniqueName": "c:\\Users\\jefte\\Desktop\\Exo.WebApi\\Exo.WebApi.csproj",
       "projectName": "Exo.WebApi",
-      "projectPath": "C:\\Users\\jefte\\Desktop\\Exo.WebApi\\Exo.WebApi.csproj",
+      "projectPath": "c:\\Users\\jefte\\Desktop\\Exo.WebApi\\Exo.WebApi.csproj",
       "packagesPath": "C:\\Users\\jefte\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\jefte\\Desktop\\Exo.WebApi\\obj\\",
+      "outputPath": "c:\\Users\\jefte\\Desktop\\Exo.WebApi\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\jefte\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -8638,6 +8638,24 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
+        "downloadDependencies": [
+          {
+            "name": "Microsoft.AspNetCore.App.Ref",
+            "version": "[6.0.33, 6.0.33]"
+          },
+          {
+            "name": "Microsoft.NETCore.App.Host.win-x64",
+            "version": "[6.0.33, 6.0.33]"
+          },
+          {
+            "name": "Microsoft.NETCore.App.Ref",
+            "version": "[6.0.33, 6.0.33]"
+          },
+          {
+            "name": "Microsoft.WindowsDesktop.App.Ref",
+            "version": "[6.0.33, 6.0.33]"
+          }
+        ],
         "frameworkReferences": {
           "Microsoft.AspNetCore.App": {
             "privateAssets": "none"
