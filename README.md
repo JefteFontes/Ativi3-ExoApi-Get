@@ -1,39 +1,45 @@
-# Atividade 03 - ExoApi - Listagem de Projetos
+# Ativi3-ExoApi-Get
 
-Este repositório contém a implementação de uma API para a empresa **ExoApi**, desenvolvida como parte de uma atividade de **Desenvolvimento de APIs**. A API permite a conexão com o banco de dados e a listagem de projetos cadastrados.
+Este repositório contém a implementação de uma API para a empresa **ExoApi**, desenvolvida como parte de uma atividade de **Desenvolvimento de APIs**. A API permite a conexão com o banco de dados e a listagem de projetos cadastrados, além de funcionalidades CRUD completas para **Projetos** e **Usuários**, bem como a implementação de **Login** e suporte a **CORS**.
 
 ## Estrutura do Projeto
 
 O projeto está organizado da seguinte forma:
 
 - `.vscode/`: Configurações do VSCode.
-- `Contexts/`: Contém a classe responsável pela configuração da conexão com o banco de dados.
-- `Controllers/`: Controlador que expõe as operações de listagem de projetos via API.
-- `Models/`: Modelo da entidade **Projeto**, com seus atributos.
+- `Contexts/`: Classe responsável pela configuração da conexão com o banco de dados.
+- `Controllers/`: Controladores que expõem as operações da API.
+- `Models/`: Modelos das entidades **Projeto** e **Usuário**, com seus atributos.
 - `Properties/`: Configurações do projeto.
-- `Repositories/`: Repositório responsável pela manipulação e acesso aos dados do banco.
+- `Repositories/`: Repositórios responsáveis pela manipulação e acesso aos dados do banco.
 - `bin/`, `obj/`: Diretórios gerados automaticamente com a build do projeto.
 - `Exo.WebApi.csproj`: Arquivo de configuração do projeto.
 - `Exo.WebApi.sln`: Solução do projeto.
 - `Program.cs`: Arquivo de entrada do projeto.
 - `appsettings.json` e `appsettings.Development.json`: Configurações de ambiente do projeto.
 
-## Funcionalidade
+## Funcionalidades
 
-A API desenvolvida oferece uma funcionalidade principal:
+A API desenvolvida oferece as seguintes funcionalidades principais:
 
+### **Branch `Atividade 03 - GET`**
 - **Listagem de Projetos**: Disponibiliza uma lista dos projetos cadastrados no banco de dados via o endpoint `GET /api/projetos`.
 
-## Branches
+### **Branch `Atividade 04D - CRUD de Projetos`**
+- **Criação de Projetos**: Permite adicionar novos projetos via o endpoint `POST /api/projetos`.
+- **Leitura de Projetos**: Exibe uma lista de projetos via `GET /api/projetos`.
+- **Atualização de Projetos**: Permite a edição de projetos já cadastrados via `PUT /api/projetos/{id}`.
+- **Exclusão de Projetos**: Remove um projeto existente no banco de dados via `DELETE /api/projetos/{id}`.
 
-O projeto é organizado em diferentes branches para cada etapa de desenvolvimento e funcionalidade. As principais branches são:
+### **Branch `Atividade 04E - CRUD de Usuários`**
+- **Criação de Usuários**: Permite adicionar novos usuários via o endpoint `POST /api/usuarios`.
+- **Leitura de Usuários**: Exibe uma lista de usuários via `GET /api/usuarios`.
+- **Atualização de Usuários**: Permite a edição de usuários já cadastrados via `PUT /api/usuarios/{id}`.
+- **Exclusão de Usuários**: Remove um usuário existente no banco de dados via `DELETE /api/usuarios/{id}`.
 
-- **main**: Branch principal, contém a versão estável do projeto.
-- **feature/listagem-projetos**: Contém a implementação da funcionalidade de listagem de projetos via API.
-- **feature/conexao-banco**: Responsável pela implementação da conexão com o banco de dados.
-- **feature/model-projeto**: Inclui o modelo da entidade **Projeto** com seus atributos.
-
-Ao desenvolver novas funcionalidades, recomenda-se criar uma nova branch seguindo o padrão `feature/nome-da-funcionalidade`.
+### **Branch `Atividade 04F - Login e CORS`**
+- **Login de Usuários**: Permite que os usuários façam login no sistema via o endpoint `POST /api/login`.
+- **Configuração de CORS**: Implementa suporte a CORS, permitindo o acesso à API a partir de diferentes origens.
 
 ## Como Executar
 
@@ -46,19 +52,10 @@ Ao desenvolver novas funcionalidades, recomenda-se criar uma nova branch seguind
 
 1. **Banco de Dados**:
    - Abra o **SQL Server Management Studio (SSMS)**.
-   - Carregue o script `cria-db.sql` disponível na pasta `Material-Aluno` e execute para criar o banco de dados e os usuários.
+   - Carregue o script `cria-db.sql` e execute para criar o banco de dados e os usuários.
 
-2. **Clonando o Repositório**:
-   - Clone o repositório e escolha a branch desejada:
-     ```bash
-     git clone https://github.com/usuario/exoapi.git
-     cd exoapi
-     git checkout feature/listagem-projetos
-     ```
-
-3. **Configurando o Projeto**:
-   - Abra o terminal dentro da pasta do projeto (`Exo.WebApi`).
-   - Verifique se o .NET está instalado e na versão correta:
+2. **Configurando o Projeto**:
+   - Abra o terminal e verifique se o .NET está instalado e na versão correta:
      ```bash
      dotnet --version
      ```
@@ -71,10 +68,10 @@ Ao desenvolver novas funcionalidades, recomenda-se criar uma nova branch seguind
      dotnet restore
      ```
 
-4. **Configuração da String de Conexão**:
+3. **Configuração da String de Conexão**:
    - Configure a string de conexão para o seu ambiente no arquivo `ExoContext.cs`.
 
-5. **Compilação e Execução**:
+4. **Compilação e Execução**:
    - Compile o projeto:
      ```bash
      dotnet build
@@ -84,17 +81,21 @@ Ao desenvolver novas funcionalidades, recomenda-se criar uma nova branch seguind
      dotnet run
      ```
 
-6. **Testando no Navegador**:
+5. **Testando no Navegador**:
    - Após a execução do comando `dotnet run`, acesse o navegador e digite a URL gerada pelo servidor seguido do sufixo `/api/projetos` para visualizar a lista de projetos cadastrados.
+   
+   Para testar as outras funcionalidades (CRUD e login), utilize ferramentas como **Insomnia** ou **Postman**.
 
-## Arquitetura
+## Branches do Projeto
 
-- **Context**: A classe `ExoContext` é responsável por gerenciar a conexão com o banco de dados e o acesso às entidades.
-- **Model**: A classe `Projeto` representa o modelo da entidade **Projeto**, contendo atributos como `Id`, `NomeDoProjeto`, `Area` e `Status`.
-- **Repository**: A classe `ProjetoRepository` implementa a lógica de acesso e manipulação dos dados de projetos.
-- **Controller**: A classe `ProjetosController` expõe os endpoints da API, sendo responsável pelo método **GET** que lista os projetos.
+### **Atividade 03 - GET**
+- Implementa a funcionalidade de listagem de projetos cadastrados no banco de dados via `GET /api/projetos`.
 
-## Teste da API
+### **Atividade 04D - CRUD de Projetos**
+- Implementa as operações de **Criação**, **Leitura**, **Atualização** e **Exclusão** de projetos.
 
-Use ferramentas como **Insomnia** ou **Postman** para fazer requisições à API e visualizar a listagem de projetos cadastrados no banco de dados. A URL para testar o **GET** da listagem de projetos é:
+### **Atividade 04E - CRUD de Usuários**
+- Implementa as operações de **Criação**, **Leitura**, **Atualização** e **Exclusão** de usuários.
 
+### **Atividade 04F - Login e CORS**
+- Implementa o **Login** de usuários via `POST /api/login` e adiciona suporte a **CORS** para permitir o acesso à API a partir de diferentes origens.
